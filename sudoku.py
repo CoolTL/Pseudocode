@@ -14,7 +14,8 @@ class Sudoku:
     def rem_num(self, x, y):
         self.grid[x][y] = ""
 
-    def change_num(self, x, y, n):
+    def change_num(self, x, y, *n):
+        n = int(n[0])
         if n:
             
             if n == self.grid[x][y]:
