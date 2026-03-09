@@ -30,13 +30,22 @@ class Generator(ABC):
             sudoku = sudoku.replace(letters[i], str(lookup[i]))            
         return sudoku
 
+    def rotate_seed(seed):
+        """ Rotate the seed randomly between its 4 sides """
+        return np.rot90(seed, randrange(0, 4), axes=(0,1))
+
+    def flip_seed(seed):
+        """ Flip the seed either horizontally, vertically or not at all """
+        if randrange(0, 1) == 1:
+            seed = np.flipud(seed)
+        if randrange(0, 1) == 2:
+            seed = np.fliplr(seed)
+        return seed
+
     def turn_into_sudoku(self):
         """ This function converts the list of numbers back into the backend format we use """
         pass
 
 # https://gamedev.stackexchange.com/questions/56149/how-can-i-generate-sudoku-puzzles
-# Numpy methods I can use
-# .rot90 to rotate the sudoku seed
-# .flip/flipud/fliplr to flip the sudoku seed
 test = Generator()
 print(test.generate_lookup_table())
