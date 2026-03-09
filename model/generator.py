@@ -8,7 +8,7 @@ class Generator(ABC):
 
     def __init__(self):
         seed = EASY_SEED_SOLVED
-        self.convert_to_numbers(seed)
+        self.turn_into_sudoku(self.convert_to_numbers(seed))
         
     # @abstractmethod
     def generate_lookup_table(self):
@@ -42,10 +42,16 @@ class Generator(ABC):
             seed = np.fliplr(seed)
         return seed
 
-    def turn_into_sudoku(self):
+    def turn_into_sudoku(self, seed):
         """ This function converts the list of numbers back into the backend format we use """
-        pass
+        sudoku = np.empty((9, 9), dtype=int)
+        print(test.ndim)
+        counter = 0
+        for i in range(0, 9):
+            for j in range(0, 9):
+                sudoku[i][j] = seed[counter]
+                counter += 1
+        print(test)
 
 # https://gamedev.stackexchange.com/questions/56149/how-can-i-generate-sudoku-puzzles
 test = Generator()
-print(test.generate_lookup_table())
