@@ -14,16 +14,12 @@ class View(QObject):
         # This variable stores which button the user has selected
         self.selected_cell = None
 
-    def setup_game(self):
-        """ Function for setting up the game """
-        pass
-
     def cell_selected(self, cell):
         """ Change which cell is selected """
         # self.selected_cell = cell
         pass
 
-    def change_number(self):
+    def change_number(self, cell):
         """ Change the number in the selected cell to the one picked by the user """
         pass
 
