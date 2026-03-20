@@ -7,7 +7,7 @@ class solver():
         self.sudoku = self.sudokugrid
 
     def box_check(n, m, grid):
-        box_num = []
+        box_num = {}
         # Checking each value in a box
         for l in range((n-3), n):
             for p in range((m-3), m):
@@ -18,7 +18,7 @@ class solver():
     
     def col_check(grid, k):
         # Creating a list to keep track of numbers in colloumns
-        col_num = []
+        col_num = {}
         # Checking each value in a colloumn
         for r in range(9):
             # Checks if the number has alreadey appeared or not, if not then it adds it to numbers seen
@@ -66,15 +66,44 @@ class solver():
         if len(cor_box) == 9 and len(cor_rows) == 9 and len(cor_col) == 9:
             return True
 
-    def solve(sudoku):
+    def solve(self, sudoku):
         cor_nums = {1,2,3,4,5,6,7,8,9}
+        counter = 0
 
         while True:
             for i in sudoku:
-                for j in i:
-                    if j != "":
+                for j in len(i):
+                    if i[j] != "":
                         pass
                     else:
+                        counter += 1
+                        if soduku.index(i) => 7:
+                            a = 9
+                        elif sudoku.index(i) => 4:
+                            a = 6
+                        else:
+                            a = 3
+                        
+                        if i[j] => 7:
+                            b = 9
+                        elif i[j] => 4:
+                            b = 6
+                        else:
+                            b = 3
+
+                        m = col_check(sudoku, j) 
+                        l = box_check(a, b, sudoku)
+                        n = cor_nums-i
+                        n = n-m
+                        n = n-l
+
+                        if len(n) == 1:
+                            k = n[0]
+                            self.sudoku.change_num(j, k)
+                            j = k
+                            counter -= 1
+                if counter == 0:
+                    break
 
                     
-                    self.sudoku.change_num
+
