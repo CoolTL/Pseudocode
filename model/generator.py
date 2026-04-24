@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from seeds import *
+#from model.seeds import *
 from random import randrange
 import numpy as np
 
@@ -7,8 +7,9 @@ class Generator(ABC):
     """ Abstract base class for sudoku generators. """
 
     def __init__(self):
-        seed = EASY_SEED_SOLVED
-        self.convert_to_matrix(self.convert_to_numbers(self.prepare_seed(HARD_SEED_SOLVED)))
+        #seed = EASY_SEED_SOLVED
+        #self.convert_to_matrix(self.convert_to_numbers(self.prepare_seed(HARD_SEED_SOLVED)))
+        pass
         
     def prepare_seed(self, seed):
         """ Turns the seed into the letters a-i so it the numbers can be scrambled """
@@ -61,4 +62,3 @@ class Generator(ABC):
         print(sudoku)
 
 # https://gamedev.stackexchange.com/questions/56149/how-can-i-generate-sudoku-puzzles
-test = Generator()

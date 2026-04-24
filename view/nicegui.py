@@ -5,7 +5,6 @@ class NiceguiMain:
         self.cells = {}
         self.num_pad_buttons = []
         self.setup_screen()
-        #self.cells[1,5].set_text("test")
 
     def setup_screen(self):
         with ui.row():
@@ -25,3 +24,11 @@ class NiceguiMain:
     def sudoku_num_pressed(self):
         """ Selects a button on the sudoku grid """
         pass
+
+    def get_sudoku(self):
+        """ This method returns a full numpy matrix of the sudoku for the controller/checker """
+        pass
+
+    def change_num(self, x, y, num):
+        """ This gets called by the controller to change numbers on the sudoku grid """
+        self.cells[x,y].set_text(f"{num}")
