@@ -59,6 +59,7 @@ class Generator(ABC):
         # Flip or rotate the sudokus for more randomness
         sudoku = self.flip_matrix(sudoku)
         sudoku = self.rotate_matrix(sudoku)
-        print(sudoku)
+        #print(sudoku)
+        return sudoku
 
 # https://gamedev.stackexchange.com/questions/56149/how-can-i-generate-sudoku-puzzles
