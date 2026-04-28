@@ -1,10 +1,11 @@
 class SudokuController:
     """ Connects the model and view """
     
-    def __init__(self, model, view, seeds):
+    def __init__(self, model, view, seeds, solver):
         self.model = model
         self.view = view
         self.seeds = seeds
+        self.solver = solver
         self.setup_game()
 
     def get_seed(self):
@@ -12,6 +13,11 @@ class SudokuController:
         seed = self.model.prepare_seed(self.seeds.EASY_SEED)
         seed = self.model.convert_to_numbers(seed)
         return self.model.convert_to_matrix(seed)
+
+    # For getting the grid from view, to give to solver
+    def game_update(self):
+        grid = self.view.get_sudoku()
+        self.solver.get_grid(grid)
 
     def setup_game(self):
         """ Function for setting up the game """

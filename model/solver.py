@@ -1,10 +1,9 @@
 from sudoku import Sudoku
 import numpy as np
-class solver():
+class Solver():
     
-    def __init__(self, sudokugrid):
-
-        self.sudoku = sudokugrid
+    def __init__(self):
+        self.sudoku = None
 
     def box_check(self, n, m, grid):
         box_num = set()
@@ -102,6 +101,8 @@ class solver():
                             counter -= 1
                 if counter == 0:
                     break
+    def get_grid(self, sudoku):
+        self.sudoku = sudoku 
 
                     
 
