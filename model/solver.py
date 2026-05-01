@@ -1,12 +1,15 @@
 class Solver:
 
     def __init__(self):
+        # Sets the rigid variables
         self.correct_numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9}
         self.empty = 0
 
+    # Gets the colomn
     def col_check(self, grid, col):
         return {grid[row][col] for row in range(9)}
 
+    # Gets the numbers in the box
     def box_check(self, row, col, grid):
         box_nums = set()
 
@@ -18,7 +21,7 @@ class Solver:
                 box_nums.add(grid[r][c])
 
         return box_nums
-
+    # Gets all numbers from a row, colomn and box, and then removes it from the correct numbers to find the remaing candidates
     def get_candidates(self, grid, row, col):
         row_nums = set(grid[row])
         col_nums = self.col_check(grid, col)
@@ -26,6 +29,7 @@ class Solver:
 
         return self.correct_numbers - row_nums - col_nums - box_nums
 
+    # Finds the empty squares
     def find_empty(self, grid):
         for row in range(9):
             for col in range(9):
@@ -34,20 +38,21 @@ class Solver:
         return None
 
     def solve(self, grid):
+        # Finding the empty squares in the grid
         empty = self.find_empty(grid)
-
+        # If there are none, then it is solved
         if empty is None:
-            return True  # færdig
-
+            return True
+        # Getting the rows and colomn position of the empty squares
         row, col = empty
-
+        # Getting the getting the candiate of the square, and then inserting the value
         for value in self.get_candidates(grid, row, col):
             grid[row][col] = value
-
+            # Function calls itself and if its true, then returns true until its done
             if self.solve(grid):
                 return True
-
-            grid[row][col] = self.empty  # backtrack
+            # Resets the number to zero, if there wasnt found a solution
+            grid[row][col] = self.empty
 
         return False
 
