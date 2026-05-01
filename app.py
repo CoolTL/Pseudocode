@@ -13,5 +13,6 @@ solver = Solver()
 sudoku_generator = Generator()
 game_page = NiceguiMain()
 sudoku_controller = SudokuController(sudoku_generator, game_page, SEEDS, solver)
+game_page.get_controller(sudoku_controller)
 
 ui.run()

@@ -2,12 +2,15 @@ from nicegui import ui
 import numpy as np
 
 class NiceguiMain:
-    def __init__(self, controller):
-        self.controller = controller
+    def __init__(self):
+        self.controller = None
+
         self.cells = {}
         self.selected_cell = None
         self.num_pad_buttons = []
         self.setup_screen()
+    def get_controller(self, controller):
+        self.controller = controller
 
     def setup_screen(self):
         with ui.row():

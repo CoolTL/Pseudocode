@@ -68,8 +68,9 @@ class Solver():
     def solve(self, sudoku):
         cor_nums = {1,2,3,4,5,6,7,8,9}
         counter = 0
+        t = 0
 
-        while True:
+        while t < 10:
             for i in sudoku:
                 for j in range(len(i)):
                     if i[j] != "":
@@ -101,6 +102,8 @@ class Solver():
                             counter -= 1
                 if counter == 0:
                     break
+            t += 1
+            print(self.sudoku)
     def get_grid(self, sudoku):
         self.sudoku = sudoku 
 

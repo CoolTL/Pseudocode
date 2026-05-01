@@ -19,6 +19,7 @@ class SudokuController:
         grid = self.view.get_sudoku()
         self.solver.get_grid(grid)
         print("test")
+        self.solver.solve(grid)
 
     def setup_game(self):
         """ Function for setting up the game """
