@@ -1,4 +1,4 @@
-from sudoku import Sudoku
+from model.sudoku import Sudoku
 import numpy as np
 class Solver():
     
