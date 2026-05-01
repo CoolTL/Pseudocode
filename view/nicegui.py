@@ -2,7 +2,8 @@ from nicegui import ui
 import numpy as np
 
 class NiceguiMain:
-    def __init__(self):
+    def __init__(self, controller):
+        self.controller = controller
         self.cells = {}
         self.selected_cell = None
         self.num_pad_buttons = []
@@ -31,6 +32,8 @@ class NiceguiMain:
     def sudoku_num_pressed(self, button):
         """ Selects a button on the sudoku grid """
         self.selected_cell = button
+        # Tell the controller something has happened
+        self.game_updated()
 
     def get_sudoku(self):
         """ This method returns a full numpy matrix of the sudoku for the controller/checker """
@@ -50,3 +53,7 @@ class NiceguiMain:
     def disable_num(self, x, y):
         """ Disables a button for use in setting up the board """
         self.cells[x,y].disable()
+
+    def game_updated(self):
+        """ This tells the controller when the board has changed """
+        self.controller.game_update()
