@@ -6,6 +6,7 @@ class SudokuController:
         self.view = view
         self.seeds = seeds
         self.solver = solver
+        self.completed = None
         self.setup_game()
 
     def get_seed(self):
@@ -14,15 +15,14 @@ class SudokuController:
         seed = self.model.convert_to_numbers(seed)
         return self.model.convert_to_matrix(seed)
 
-    # For getting the grid from view, to give to solver
+    # Checks if the sudoku is solved
     def game_update(self):
         grid = self.view.get_sudoku()
         self.solver.get_grid(grid)
-        print("test")
-        if self.solver.solve(grid):
-            print(grid)
-        else:
-            print("ingen løsning")
+        if self.completed == grid:
+            return True
+
+
 
     def setup_game(self):
         """ Function for setting up the game """
@@ -38,4 +38,10 @@ class SudokuController:
                 col_num += 1
             col_num = 0
             row_num += 1
-
+        grid = self.view.get_sudoku()
+        self.solver.get_grid(grid)
+        self.completed = grid
+        if self.solver.solve(grid):
+            print(grid)
+        else:
+            print("ingen løsning")
