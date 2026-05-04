@@ -24,25 +24,31 @@ class NiceguiMain:
                                     for col in range(0, 3):
                                         actual_row = block_row * 3 + row
                                         actual_col = block_col * 3 + col
-                                        self.cells[(actual_row, actual_col)] = ui.button("", on_click=lambda r=row, c=col: self.sudoku_num_pressed(self.cells[(r,c)])).classes('w-[60px] h-[60px] p-0')
+                                        self.cells[(actual_row, actual_col)] = ui.button("", on_click=lambda r=actual_row, c=actual_col: self.sudoku_num_pressed(self.cells[(r,c)], r, c)).classes('w-[60px] h-[60px] p-0')
             # Number pad
             with ui.card():
                 with ui.grid(columns=3):
                     for i in range (0, 9):
                         button = ui.button(f"{i+1}", on_click=lambda n=i+1: self.numpad_num_pressed(n)).classes('w-[50px] h-[50px]')
                         self.num_pad_buttons.append(button)
+            # Hint button
+            with ui.card():
+                self.hint_button = ui.button("Hint", on_click=lambda: self.selected_cell.set_text(self.controller.give_hint(self.selected_cell_x, self.selected_cell_y))) 
+    def completed(self):
+        with ui.card():
+            ui.label("You did it! Now kill yourself")
 
     def numpad_num_pressed(self, num):
         """ Change the selected cells number """
         if self.selected_cell:
             self.selected_cell.set_text(num)
-            # Tell the controller something has happened
-            self.game_updated()
 
 
-    def sudoku_num_pressed(self, button):
+    def sudoku_num_pressed(self, button, x, y):
         """ Selects a button on the sudoku grid """
         self.selected_cell = button
+        self.selected_cell_x = x
+        self.selected_cell_y = y
 
     def get_sudoku(self):
         """ This method returns a full numpy matrix of the sudoku for the controller/checker """
