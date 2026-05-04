@@ -16,10 +16,15 @@ class NiceguiMain:
         with ui.row():
             # Sudoku grid
             with ui.card():
-                with ui.grid(columns=9):
-                    for row in range(0, 9):
-                        for col in range(0, 9):
-                            self.cells[(row, col)] = ui.button("", on_click=lambda r=row, c=col: self.sudoku_num_pressed(self.cells[(r,c)])).classes('w-[60px] h-[60px] p-0')
+                with ui.grid(columns=3).classes('gap-2 bg-white border-4 border-white'):
+                    for block_row in range(0, 3):
+                        for block_col in range(0, 3):
+                            with ui.grid(columns=3).classes('gap-0'):
+                                for row in range(0, 3):
+                                    for col in range(0, 3):
+                                        actual_row = block_row * 3 + row
+                                        actual_col = block_col * 3 + col
+                                        self.cells[(actual_row, actual_col)] = ui.button("", on_click=lambda r=row, c=col: self.sudoku_num_pressed(self.cells[(r,c)])).classes('w-[60px] h-[60px] p-0')
             # Number pad
             with ui.card():
                 with ui.grid(columns=3):
