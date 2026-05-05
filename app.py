@@ -8,6 +8,8 @@ from model.solver import Solver
 from view.title_screen import Titlescreen
 
 SEEDS = seeds
+solver = Solver()
+sudoku_generator = Generator()
 
 @ui.page('/')
 def main_page():
@@ -15,8 +17,6 @@ def main_page():
 
 @ui.page('/easy')
 def easy_page():
-    solver = Solver()
-    sudoku_generator = Generator()
     game_page = NiceguiMain()
     sudoku_controller = SudokuController(sudoku_generator, game_page, SEEDS, solver)
     game_page.get_controller(sudoku_controller)

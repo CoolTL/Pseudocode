@@ -46,6 +46,7 @@ class SudokuController:
         self.solver.get_grid(grid)
         self.completed = grid
         if self.solver.solve(grid):
-            print(grid)
+            print(self.completed)
+            print("Der er en løsning")
         else:
             print("ingen løsning")
