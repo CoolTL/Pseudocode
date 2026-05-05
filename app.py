@@ -3,7 +3,7 @@ from nicegui import ui
 import seeds
 
 from model.generator import Generator
-from view.nicegui import NiceguiMain
+from view.sudoku_view import NiceguiMain
 from controller.sudoku_controller import SudokuController
 from model.solver import Solver
 

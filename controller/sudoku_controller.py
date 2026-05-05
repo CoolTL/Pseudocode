@@ -1,3 +1,5 @@
+import numpy as np
+
 class SudokuController:
     """ Connects the model and view """
     
@@ -19,8 +21,8 @@ class SudokuController:
     def game_update(self):
         grid = self.view.get_sudoku()
         self.solver.get_grid(grid)
-        if self.completed.all() == grid.all():
-            self.view.completed()
+        if np.array_equal(self.completed, grid):
+            self.view.complete()
 
     def give_hint(self, x, y):
         return self.completed[x][y]

@@ -34,14 +34,16 @@ class NiceguiMain:
             # Hint button
             with ui.card():
                 self.hint_button = ui.button("Hint", on_click=lambda: self.selected_cell.set_text(self.controller.give_hint(self.selected_cell_x, self.selected_cell_y))) 
-    def completed(self):
-        with ui.card():
-            ui.label("You did it! Now kill yourself")
+            self.message = ui.label("")
+    def complete(self):
+        print("test")
+        self.message.set_text("You did it! Now kill yourself")
 
     def numpad_num_pressed(self, num):
         """ Change the selected cells number """
         if self.selected_cell:
             self.selected_cell.set_text(num)
+            self.controller.game_update()
 
 
     def sudoku_num_pressed(self, button, x, y):
