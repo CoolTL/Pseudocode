@@ -13,6 +13,8 @@ class NiceguiMain:
         self.controller = controller
 
     def setup_screen(self):
+        # Back button
+        ui.button(icon='arrow_back', on_click=lambda: ui.navigate.to('/'))
         with ui.row():
             # Sudoku grid
             with ui.card():
@@ -34,10 +36,11 @@ class NiceguiMain:
             # Hint button
             with ui.card():
                 self.hint_button = ui.button("Hint", on_click=lambda: self.selected_cell.set_text(self.controller.give_hint(self.selected_cell_x, self.selected_cell_y))) 
-            self.message = ui.label("")
     def complete(self):
-        print("test")
-        self.message.set_text("You did it! Now kill yourself")
+        with ui.dialog() as dialog, ui.card():
+            ui.label("You did it! Now kill yourself")
+            ui.button("OK", on_click=dialog.close)
+        dialog.open()
 
     def numpad_num_pressed(self, num):
         """ Change the selected cells number """
