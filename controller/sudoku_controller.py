@@ -3,17 +3,17 @@ import numpy as np
 class SudokuController:
     """ Connects the model and view """
     
-    def __init__(self, model, view, seeds, solver):
+    def __init__(self, model, view, seed, solver):
         self.model = model
         self.view = view
-        self.seeds = seeds
+        self.seed = seed
         self.solver = solver
         self.completed = None
         self.setup_game()
 
     def get_seed(self):
         """ This method gets the start game setup from the model """
-        seed = self.model.prepare_seed(self.seeds.EASY_SEED)
+        seed = self.model.prepare_seed(self.seed)
         seed = self.model.convert_to_numbers(seed)
         return self.model.convert_to_matrix(seed)
 
