@@ -32,6 +32,6 @@ class SeedController:
         seed = difficulty_data[chosen_name]
         solved = difficulty_data[f"{chosen_name}_SOLVED"]
 
-        return chosen_name, seed, solved 
+        return seed 
         
         
