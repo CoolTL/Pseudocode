@@ -55,6 +55,3 @@ class Solver:
             grid[row][col] = self.empty
 
         return False
-
-    def get_grid(self, sudoku):
-        self.sudoku = sudoku

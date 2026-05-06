@@ -17,16 +17,15 @@ class SudokuController:
         seed = self.model.convert_to_numbers(seed)
         return self.model.convert_to_matrix(seed)
 
-    # Checks if the sudoku is solved
     def game_update(self):
+        """ Checks if the sudoku is solved, and tells the view if so"""
         grid = self.view.get_sudoku()
-        self.solver.get_grid(grid)
         if np.array_equal(self.completed, grid):
             self.view.complete()
 
     def give_hint(self, x, y):
+        """ Return the correct value at the given coordinates """
         return self.completed[x][y]
-
 
     def setup_game(self):
         """ Function for setting up the game """
@@ -43,8 +42,8 @@ class SudokuController:
             col_num = 0
             row_num += 1
         grid = self.view.get_sudoku()
-        self.solver.get_grid(grid)
         self.completed = grid
+        # Debug code:
         if self.solver.solve(grid):
             print(self.completed)
             print("Der er en løsning")
