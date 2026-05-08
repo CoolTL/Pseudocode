@@ -9,6 +9,7 @@ class NiceguiMain:
         self.selected_cell = None
         self.num_pad_buttons = []
         self.setup_screen()
+        self.toggle_enabled = False
     def get_controller(self, controller):
         self.controller = controller
 
@@ -35,7 +36,8 @@ class NiceguiMain:
                         self.num_pad_buttons.append(button)
             # Hint button
             with ui.card():
-                self.hint_button = ui.button("Hint", on_click=lambda: self.selected_cell.set_text(self.controller.give_hint(self.selected_cell_x, self.selected_cell_y))) 
+                self.hint_button = ui.button("Hint", on_click=lambda: self.selected_cell.set_text(self.controller.give_hint(self.selected_cell_x, self.selected_cell_y)))
+                ui.toggle(["Normal", "Notes"], value="Normal")
     def complete(self):
         with ui.dialog() as dialog, ui.card():
             ui.label("You did it! Now kill yourself")
@@ -65,6 +67,9 @@ class NiceguiMain:
                 else:
                     sudoku[row][col] = int(self.cells[row, col].text)
         return sudoku
+
+    def note_toggle(self):
+
 
     def change_num(self, x, y, num):
         """ This gets called by the controller to change numbers on the sudoku grid """
