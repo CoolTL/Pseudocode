@@ -9,7 +9,7 @@ class NiceguiMain:
         self.selected_cell = None
         self.num_pad_buttons = []
         self.setup_screen()
-        self.toggle_enabled = False
+        self.note_enabled = False
     def get_controller(self, controller):
         self.controller = controller
 
@@ -69,7 +69,7 @@ class NiceguiMain:
         return sudoku
 
     def note_toggle(self):
-
+        self.note_enabled = True
 
     def change_num(self, x, y, num):
         """ This gets called by the controller to change numbers on the sudoku grid """
