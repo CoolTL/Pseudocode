@@ -20,21 +20,24 @@ def main_page():
 @ui.page('/easy')
 def easy_page():
     game_page = NiceguiMain()
-    seed = seed_controller.get_random_seed("EASY_SEED")
+    seed, seed_name = seed_controller.get_random_seed("EASY_SEED")
+    print(seed_name)
     sudoku_controller = SudokuController(sudoku_generator, game_page, seed, solver)
     game_page.get_controller(sudoku_controller)
 
 @ui.page('/medium')
 def medium_page():
     game_page = NiceguiMain()
-    seed = seed_controller.get_random_seed("MEDIUM_SEED")
+    seed, seed_name = seed_controller.get_random_seed("MEDIUM_SEED")
+    print(seed_name)
     sudoku_controller = SudokuController(sudoku_generator, game_page, seed, solver)
     game_page.get_controller(sudoku_controller)
 
 @ui.page('/hard')
 def hard_page():
     game_page = NiceguiMain()
-    seed = seed_controller.get_random_seed("HARD_SEED")
+    seed, seed_name = seed_controller.get_random_seed("HARD_SEED")
+    print(seed_name)
     sudoku_controller = SudokuController(sudoku_generator, game_page, seed, solver)
     game_page.get_controller(sudoku_controller)
 

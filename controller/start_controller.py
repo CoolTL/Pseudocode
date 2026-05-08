@@ -14,8 +14,7 @@ class SeedController:
 
     def get_random_seed(self, difficulty):
         """
-        Returnerer et tilfældig seed + dens løsning
-        fx: ("EASY1", seed, solved_seed)
+        Returnerer et tilfældig seed
         """
 
         difficulty_data = self.seeds[difficulty]
@@ -30,8 +29,7 @@ class SeedController:
         chosen_name = random.choice(seed_names)
 
         seed = difficulty_data[chosen_name]
-        solved = difficulty_data[f"{chosen_name}_SOLVED"]
 
-        return seed 
+        return seed, chosen_name
         
         
