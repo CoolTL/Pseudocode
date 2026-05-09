@@ -10,6 +10,8 @@ class NiceguiMain:
         self.main_labels = {}
         self.notes = {}
         self.selected_cell = None
+        self.selected_cell_x = None
+        self.selected_cell_y = None
         self.num_pad_buttons = []
         self.setup_screen()
         self.note_enabled = False
@@ -37,7 +39,7 @@ class NiceguiMain:
                                             with ui.grid(columns=3).classes('w-full h-full gap-0 p-1'):
                                                 for n in range(1, 10):
                                                     # Store label text is empty by default
-                                                    lbl = ui.label("").classes('text-[8px] leading-none text-gray-500 m-auto')
+                                                    lbl = ui.label("").classes('text-[12px] leading-none text-black m-auto')
                                                     self.notes[(actual_row, actual_col, n)] = lbl
                                             # This is the main labels for big numbers in the cells
                                             main_lbl = ui.label("").classes('absolute-center text-xl text-black font-bold')
@@ -51,10 +53,13 @@ class NiceguiMain:
             # Hint button
             with ui.card():
                 self.hint_button = ui.button("Hint", on_click=lambda: self.change_num(self.selected_cell_x, self.selected_cell_y, self.controller.give_hint(self.selected_cell_x, self.selected_cell_y)))
-                ui.toggle(["Normal", "Notes"], value="Normal")
+                # Toggle button between normal mode and notes
+                ui.toggle(["Normal", "Notes"], value="Normal", on_change=lambda: self.note_toggle())
+
     def complete(self):
+        """ Make a popup for when the sudoku is solved """
         with ui.dialog() as dialog, ui.card():
-            ui.label("You did it! Now kill yourself")
+            ui.label("You did it, congratulations!")
             ui.button("OK", on_click=dialog.close)
         dialog.open()
 
@@ -70,27 +75,40 @@ class NiceguiMain:
 
     def sudoku_num_pressed(self, button, x, y):
         """ Selects a button on the sudoku grid """
-        self.selected_cell = button
-        self.selected_cell_x = x
-        self.selected_cell_y = y
+        # Highlight the button and unhighlight the previous
+        if self.selected_cell:
+            self.selected_cell.set_background_color("#5898D4")
+        button.set_background_color("green")
+        if button == self.selected_cell:
+            button.set_background_color("#5898D4")
+            self.selected_cell = None
+            self.selected_cell_x = None
+            self.selected_cell_y = None
+        else:
+            self.selected_cell = button
+            self.selected_cell_x = x
+            self.selected_cell_y = y
 
     def get_sudoku(self):
         """ This method returns a full numpy matrix of the sudoku for the controller/checker """
         sudoku = np.empty((9, 9), dtype=int)
         for row in range(0, 9):
             for col in range(0, 9):
-                if self.cells[row, col].text == "":
+                if self.main_labels[(row, col)].text == "":
                     sudoku[row][col] = 0
                 else:
-                    sudoku[row][col] = int(self.cells[row, col].text)
+                    sudoku[row][col] = int(self.main_labels[(row, col)].text)
         return sudoku
 
     def note_toggle(self):
         """ Toggles if note taking is enabled or not """
-        self.note_enabled = True
+        self.note_enabled = not self.note_enabled
 
     def add_note(self, x, y, num):
         """ This takes coordinates and a number and adds it as a note to a cell """
+        # Dont add notes if a main number is in the cell
+        if self.main_labels[(x, y)].text != "":
+            return
         label = self.notes.get((x, y, num))
         if label:
             # This toggles whether the note is there or not
