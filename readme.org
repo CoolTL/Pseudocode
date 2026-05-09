@@ -1,3 +1,10 @@
 #+title: Sudoku TOR
 
 With this program you can play sudokus of easy, medium and hard difficulties and also input your own sudokus you want solved.
+
+Run the program from [[./app.py][app.py]].
+
+* Dependencies
+- Python 3.13.13
+- NiceGUI 3.10.0
+- Numpy 2.4.3
