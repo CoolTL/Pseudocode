@@ -1,0 +1,3 @@
+#+title: Sudoku TOR
+
+With this program you can play sudokus of easy, medium and hard difficulties and also input your own sudokus you want solved.

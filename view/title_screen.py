@@ -12,5 +12,4 @@ class Titlescreen:
             ui.button('Easy', on_click=lambda: ui.navigate.to('/easy')).classes('text-xl py-4 w-64')
             ui.button('Medium', on_click=lambda: ui.navigate.to('/medium')).classes('text-xl py-4 w-64')
             ui.button('Hard', on_click=lambda: ui.navigate.to('/hard')).classes('text-xl py-4 w-64')
-            ui.button('Variant', on_click=lambda: ui.navigate.to('/variant')).classes('text-xl py-4 w-64')
             ui.button('Solver', on_click=lambda: ui.navigate.to('/solver')).classes('text-xl py-4 w-64')

@@ -71,7 +71,10 @@ class SudokuView(ABC):
         label = self.notes.get((x, y, num))
         if label:
             # This toggles whether the note is there or not
-            label.set_text(num if label.text == "" else "")
+            if label.text == num:
+                label.set_text("")
+            else:
+                label.set_text(num)
 
     def remove_all_notes(self, x, y):
         """ This removes all the notes for when you choose a number for a cell """
