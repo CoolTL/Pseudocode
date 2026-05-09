@@ -1,5 +1,4 @@
 from nicegui import ui
-import seeds
 
 from model.generator import Generator
 from model.solver import Solver
@@ -10,7 +9,6 @@ from controller.sudoku_controller import SudokuController
 from controller.sudoku_solver_controller import SolverController
 from controller.start_controller import SeedController
 
-SEEDS = seeds
 solver = Solver()
 sudoku_generator = Generator()
 seed_controller = SeedController()
