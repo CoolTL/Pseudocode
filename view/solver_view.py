@@ -2,7 +2,7 @@ from nicegui import ui
 from view.sudoku_view_abc import SudokuView
 import numpy as np
 
-class SudokuGameView(SudokuView):
+class SolverView(SudokuView):
     """ View for the sudoku games """
     def __init__(self):
         super().__init__()
@@ -39,24 +39,27 @@ class SudokuGameView(SudokuView):
                     for i in range (0, 9):
                         button = ui.button(f"{i+1}", on_click=lambda n=i+1: self.numpad_num_pressed(n)).classes('w-[50px] h-[50px]')
                         self.num_pad_buttons.append(button)
-            # Hint button
+            # Solve button
             with ui.card():
-                self.hint_button = ui.button("Hint", on_click=lambda: self.change_num(self.selected_cell_x, self.selected_cell_y, self.controller.give_hint(self.selected_cell_x, self.selected_cell_y)))
-                # Toggle button between normal mode and notes
-                ui.toggle(["Normal", "Notes"], value="Normal", on_change=lambda: self.note_toggle())
-
-    def complete(self):
-        """ Make a popup for when the sudoku is solved """
-        with ui.dialog() as dialog, ui.card():
-            ui.label("You did it, congratulations!")
-            ui.button("OK", on_click=dialog.close)
-        dialog.open()
+                ui.button("Solve sudoku", on_click=lambda: self.controller.solve_sudoku())
 
     def numpad_num_pressed(self, num):
         """ Change the selected cells number """
         if self.selected_cell:
-            if self.note_enabled:
-                self.add_note(self.selected_cell_x, self.selected_cell_y, num)
-            else:
-                self.change_num(self.selected_cell_x, self.selected_cell_y, num)
-                self.controller.game_update()
+            self.change_num(self.selected_cell_x, self.selected_cell_y, num)
+
+    def solve_completed(self, bool):
+        """ Notifies whether solving suceeded or not """
+        if bool:
+            ui.notify("Solve suceeded!")
+        else:
+            ui.notify("Solve failed, sudoku invalid.")
+
+    def unselect_button(self):
+        """ Used for unselecting the final button when solved """
+        if self.selected_cell:
+            self.selected_cell.set_background_color("#5898D4")
+
+    def place_num(self, x, y, num):
+        """ Method that doesn't toggle numbers, used by the controller when the sudoku is solved """
+        self.main_labels[(x, y)].set_text(str(num))
