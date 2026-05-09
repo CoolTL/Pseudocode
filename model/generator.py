@@ -1,13 +1,10 @@
-from abc import ABC, abstractmethod
-#from model.seeds import *
 from random import randrange
 import numpy as np
 
-class Generator(ABC):
-    """ Abstract base class for sudoku generators. """
+class Generator:
+    """ Sudoku generator """
 
     def __init__(self):
-        #seed = EASY_SEED_SOLVED
         #self.convert_to_matrix(self.convert_to_numbers(self.prepare_seed(HARD_SEED_SOLVED)))
         pass
         
