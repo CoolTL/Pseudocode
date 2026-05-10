@@ -43,9 +43,8 @@ class SudokuController:
             row_num += 1
         grid = self.view.get_sudoku()
         self.completed = grid
+        self.solver.solve(self.completed)
         # Debug code:
-        if self.solver.solve(grid):
-            print(self.completed)
-            print("Der er en løsning")
-        else:
-            print("ingen løsning")
+        print(self.completed)
+        print("Der er en løsning")
+
